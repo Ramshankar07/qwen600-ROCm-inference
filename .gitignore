@@ -7,3 +7,4 @@ qwenc/
 model.safetensors
 *.safetensors
 *.gguf
+layerskip-official/

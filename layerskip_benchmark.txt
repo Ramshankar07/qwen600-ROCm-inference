@@ -1,0 +1,84 @@
+=== LayerSkip-Llama3.2-1B Inference ===
+Model: D:\qwen-rocm\qwen600\models\facebook.layerskip-llama3.2-1B.Q2_K.gguf
+Tokenizer: D:\qwen-rocm\qwen600\tokenizer.bin
+Loading LayerSkip model from: D:\qwen-rocm\qwen600\models\facebook.layerskip-llama3.2-1B.Q2_K.gguf
+File size: 553.961 MB
+GGUF version: 3
+Tensor count: 147
+Metadata entries: 35
+Parsed 147 tensors
+Data starts at offset: 7827648 bytes
+
+Sample tensor names:
+  blk.0.attn_k.weight
+  blk.0.attn_norm.weight
+  blk.0.attn_output.weight
+  blk.0.attn_q.weight
+  blk.0.attn_v.weight
+  blk.0.ffn_down.weight
+  blk.0.ffn_gate.weight
+  blk.0.ffn_norm.weight
+  blk.0.ffn_up.weight
+  blk.1.attn_k.weight
+Allocating 546.496 MB on GPU
+All tensors copied to GPU
+Token embedding type: 14 (Q6_K)
+Successfully loaded LayerSkip-Llama3.2-1B!
+Note: Using tied embeddings (no separate output head)
+Caching dequantized embeddings (one-time cost)...
+Cached 501 MB of dequantized embeddings
+
+Model loaded successfully!
+Configuration:
+  Layers: 16
+  Hidden size: 2048
+  FFN size: 8192
+  Heads: 32
+  KV heads: 8
+  Vocab size: 128256
+Loading tokenizer from: D:\qwen-rocm\qwen600\tokenizer.bin
+Tokenizer info:
+  Max token length: 128
+  Vocab size: 128256
+  BOS token ID: 128000
+  EOS token ID: 128001
+Tokenizer loaded successfully!
+
+Running inference test with temperature=0.8...
+
+Generating 50 tokens...
+Starting with token: 128000
+TTFT: 354.825 ms
+236 69860 15693 93366 71072 60373 44880 103560 94873 88472 25891 97409 84158 62298 38750 3811 16149 48735 21047 21047 124589 57496 17852 1189 1607 48405 62879 66353 69534 70071 21047 79594 58676 47252 7360 72863 90361 92022 62213 37041 98207 84000 115318 108022 62213 17187 58399 26917 96638 22631 88846 
+
+================================================================================
+PERFORMANCE SUMMARY
+================================================================================
+
+📊 Generation Metrics:
+  Time to First Token (TTFT): 354.825 ms
+  Time Per Output Token (TPOT):
+    Average: 253.09 ms
+    Median:  251.15 ms
+    Min:     240.605 ms
+    Max:     282.629 ms
+  Total Generation Time: 13066.9 ms
+  Tokens Generated: 50
+  Throughput: 3.82648 tokens/sec
+
+⚡ Kernel Performance Breakdown:
+--------------------------------------------------------------------------------
+Kernel                       Calls    Total      Avg   Median      Min      Max
+                                       (ms)     (ms)     (ms)     (ms)     (ms)
+--------------------------------------------------------------------------------
+matmul_fp16                     51 1041.09  20.414  20.048  20.015  26.435  [88.3%]
+softmax_kernel                1632   47.22   0.029   0.027   0.004   0.251  [4.0%]
+attention_qk_kernel           1632   40.91   0.025   0.021   0.006   0.427  [3.5%]
+swiglu_kernel                  816   22.17   0.027   0.021   0.006   0.344  [1.9%]
+rope_kernel                    816   14.31   0.018   0.015   0.006   0.113  [1.2%]
+attention_v_kernel             816   13.49   0.017   0.010   0.005   0.199  [1.1%]
+--------------------------------------------------------------------------------
+TOTAL                              1179.18
+================================================================================
+
+Inference test complete!
